@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  MeuPrimeiroApp
 //
-//  Created by Jonathan on 28/01/20.
+//  Created by Vargas on 28/01/20.
 //  Copyright © 2020 hbsis. All rights reserved.
 //
 
