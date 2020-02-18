@@ -13,6 +13,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
 
     @IBOutlet weak var nomeBarText: UITextField!
   
+
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var enderecoText: UITextField!
@@ -44,8 +45,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         let photo = imageView.image
         let rating = ratingBar.rating
         let endereco = enderecoText.text ?? ""
+        let coordinate = CLLocationCoordinate2D(latitude: 0, longitude:0)
         // Set the meal to be passed to BarTableViewController after the unwind segue.
-        bar = Bar(name: name, endereco: endereco, photo: photo, rating: rating)
+        bar = Bar(name: name, endereco: endereco, photo: photo, rating: rating, coordinate: coordinate)
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
@@ -62,6 +64,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         nomeBarText.delegate = self
         //Declarando componentes no bar
         if let bar = bar {
@@ -75,6 +80,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         updateSaveButtonState()
                
     }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         var nomeCampo : String!

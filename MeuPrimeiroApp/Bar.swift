@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import MapKit
 import os.log
 //Declarando as chaves do Ncoder
-class Bar: NSObject, NSCoding{
+class Bar: NSObject, NSCoding, MKAnnotation{
+    var coordinate: CLLocationCoordinate2D
+    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: PropertyKey.name)
         aCoder.encode(photo, forKey: PropertyKey.photo)
         aCoder.encode(rating, forKey: PropertyKey.rating)
         aCoder.encode(endereco, forKey: PropertyKey.endereco)
+        aCoder.encode(coordinate, forKey:PropertyKey.coordinate)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -32,9 +36,9 @@ class Bar: NSObject, NSCoding{
         
         let rating = aDecoder.decodeInteger(forKey: PropertyKey.rating)
         let endereco = aDecoder.decodeObject(forKey: PropertyKey.endereco)
+        let coordinate = aDecoder.decodeObject(forKey: PropertyKey.coordinate) as! CLLocationCoordinate2D
         // Must call designated initializer.
-        self.init(name: name, endereco: endereco as! String, photo: photo, rating: rating)
-        
+        self.init(name: name, endereco: endereco as! String, photo: photo, rating: rating, coordinate: coordinate)
     }
     
     //Declarando variaveis
@@ -44,6 +48,7 @@ class Bar: NSObject, NSCoding{
     var endereco: String = ""
     var numero: Int = 0
     var coordenadas: Int = 0
+    
     //MARK: Properties
     //Busca o arquivo no diretorio
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -54,11 +59,12 @@ class Bar: NSObject, NSCoding{
       static let photo = "photo"
       static let rating = "rating"
       static let endereco = "endereco"
+      static let coordinate = "coordinate"
     }
     
     
     
-    init?(name: String, endereco: String, photo: UIImage?, rating: Int) {
+    init?(name: String, endereco: String, photo: UIImage?, rating: Int, coordinate: CLLocationCoordinate2D) {
         
         // The name must not be empty
         guard !name.isEmpty else {
@@ -74,6 +80,7 @@ class Bar: NSObject, NSCoding{
         self.photo = photo
         self.rating = rating
         self.endereco = endereco
+        self.coordinate = coordinate
        // self.numero = numero
     }
     
