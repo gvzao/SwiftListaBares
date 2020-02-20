@@ -14,6 +14,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var nomeBarText: UITextField!
   
 
+    @IBOutlet weak var buttonMapa: UIButton!
+    
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var enderecoText: UITextField!
@@ -149,15 +151,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         picker.dismiss(animated: true, completion:nil)
         
     }
-    
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         nomeBarText.text = textField.text
         saveButton.isEnabled = false
         updateSaveButtonState()
         navigationItem.title = textField.text
     }
-    
     private func updateSaveButtonState() {
         // Disable the Save button if the text field is empty.
         let text = nomeBarText.text ?? ""

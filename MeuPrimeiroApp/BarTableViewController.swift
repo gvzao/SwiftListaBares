@@ -72,12 +72,11 @@ class BarTableViewController: UITableViewController {
                 
                 Bars.append(bar)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
-                // Save the meals.
                 
             }
-            // Save the meals.
-            saveMeals()
-            // Aydd a new meal.
+            // Save the Bars.
+            saveBars()
+            // Aydd a new bar.
             let newIndexPath = IndexPath(row: Bars.count, section: 0)
             
             Bars.append(bar)
@@ -100,16 +99,16 @@ class BarTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             Bars.remove(at: indexPath.row)
-            saveMeals()
+            saveBars()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    private func saveMeals() {
+    private func saveBars() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(Bars, toFile: Bar.ArchiveURL.path)
         if isSuccessfulSave {
-            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
+            os_log("Bars successfully saved.", log: OSLog.default, type: .debug)
         } else {
             os_log("Failed to save meals...", log: OSLog.default, type: .error)
         }

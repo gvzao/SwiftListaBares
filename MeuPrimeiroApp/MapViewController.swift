@@ -9,21 +9,52 @@
 import UIKit
 import MapKit
 
-class MapView: UIViewController, MKMapViewDelegate {
-    
-    let regionRadius: CLLocationDistance = 1000
 
+class MapViewController: UIViewController{
+    
+    let regionRadius: CLLocationDistance = 500
+
+    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         
         // set initial location in Honolulu
-        let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
+        let initialLocation = CLLocation(latitude: -26.9172369, longitude: -49.0707435)
         centerMapOnLocation(location: initialLocation)
         
+        let bar = Bar(name: "Bar zika", endereco: "Rua zika", photo: nil, rating: 5, coordinate: CLLocationCoordinate2D(latitude: -26.91668374, longitude: -49.0712756))
+        mapView.addAnnotation(bar!)
+        print(bar!.name)
+        
+        let bar2 = Bar(name: "Bar do Negao", endereco: "Lendaria", photo: nil, rating: 5, coordinate: CLLocationCoordinate2D(latitude: -26.917876, longitude: -49.0709269))
+        mapView.addAnnotation(bar2!)
+        print(bar!.name)
     }
+    // Annotation right callout accessory opens this mapItem in Maps app
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // 2
+        guard let annotation = annotation as? Bar else { return nil }
+        // 3
+        let identifier = "marker"
+        var view: MKMarkerAnnotationView
+        // 4
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            as? MKMarkerAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            // 5
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        return view
+    }
+    
     
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius,longitudinalMeters: regionRadius)
@@ -31,6 +62,8 @@ class MapView: UIViewController, MKMapViewDelegate {
         mapView.setRegion(coordinateRegion, animated: true)
         
     }
+    
+    
 
     // MARK: - Table view data source
 

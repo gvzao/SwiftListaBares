@@ -41,6 +41,8 @@ class Bar: NSObject, NSCoding, MKAnnotation{
         self.init(name: name, endereco: endereco as! String, photo: photo, rating: rating, coordinate: coordinate)
     }
     
+    
+    
     //Declarando variaveis
     var name: String = ""
     var photo: UIImage?
@@ -48,6 +50,10 @@ class Bar: NSObject, NSCoding, MKAnnotation{
     var endereco: String = ""
     var numero: Int = 0
     var coordenadas: Int = 0
+    
+    var title: String? {
+        return name
+    }
     
     //MARK: Properties
     //Busca o arquivo no diretorio
@@ -61,7 +67,6 @@ class Bar: NSObject, NSCoding, MKAnnotation{
       static let endereco = "endereco"
       static let coordinate = "coordinate"
     }
-    
     
     
     init?(name: String, endereco: String, photo: UIImage?, rating: Int, coordinate: CLLocationCoordinate2D) {
