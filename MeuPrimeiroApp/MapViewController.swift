@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-
+import Contacts
 
 class MapViewController: UIViewController{
     
@@ -16,6 +16,18 @@ class MapViewController: UIViewController{
 
     
     @IBOutlet weak var mapView: MKMapView!
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
+                 calloutAccessoryControlTapped control: UIControl) {
+        let location = view.annotation as! Bar
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+    }
+    
+    func mapItem() -> MKMapItem {
+        let addressDict = [CNPostalAddressStreetKey: title!]
+        mapItem().name = title
+        return mapItem()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +66,7 @@ class MapViewController: UIViewController{
         }
         return view
     }
+    
     
     
     func centerMapOnLocation(location: CLLocation) {

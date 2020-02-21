@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var nomeBarText: UITextField!
   
 
+    @IBOutlet weak var imageAB: UIImageView!
     @IBOutlet weak var buttonMapa: UIButton!
     
     @IBOutlet weak var cancelButton: UIBarButtonItem!

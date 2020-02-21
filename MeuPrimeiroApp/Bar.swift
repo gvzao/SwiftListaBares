@@ -27,7 +27,7 @@ class Bar: NSObject, NSCoding, MKAnnotation{
         //string, the initializer should fail.
         //Reconhece os objetos
         guard let name = aDecoder.decodeObject(forKey: PropertyKey.name) as? String else {
-            os_log("Unable to decode the name for a Meal object.", log: OSLog.default, type: .debug)
+            os_log("Unable to decode the name for a Bar object.", log: OSLog.default, type: .debug)
             return nil
         }
         
